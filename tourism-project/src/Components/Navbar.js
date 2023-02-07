@@ -2,17 +2,28 @@ import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import './Navbar.css'
 
+import Dropdown from './Dropdown'
+
 function Navbar() {
 
   const [click, setClick] = useState(false);
-
+  const [dropdown, setDropdown] = useState(false);
+  
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const onMouseEnter = ()=>{
+    setDropdown(true);
+  }
+
+  const onMouseLeave = ()=>{
+    setDropdown(false);
+  }
 
   return (
     <nav className='navbar'>
         <div className='navbar-container'> 
-        <Link to="/" className='navbar-logo' >
+        <Link to="/" className='navbar-logo' onClick={closeMobileMenu} >
             TRVL <i className='fab fa-typo3'/>
         </Link>
         <div className='menu-icon' onClick={handleClick} >
@@ -24,10 +35,14 @@ function Navbar() {
             Home
           </Link>
           </li>
-          <li className='nav-item'> 
-          <Link to='/destinations' className='nav-links' onClick={closeMobileMenu} >
-            Destinations
-          </Link>
+          <li className='nav-item'
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          > 
+          <div className='nav-links' >
+            Destinations &nbsp;<i className='fas fa-caret-down'/>
+          </div>
+          {dropdown && <Dropdown />}
           </li>
           <li className='nav-item'> 
           <Link to='/about-us' className='nav-links' onClick={closeMobileMenu} >
