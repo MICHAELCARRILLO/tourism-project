@@ -13,15 +13,32 @@ function Navbar() {
   const closeMobileMenu = () => setClick(false);
 
   const onMouseEnter = ()=>{
-    setDropdown(true);
+    if (dropdown){
+      setDropdown(false);
+    }
+    else{
+      setDropdown(true);
+    }
   }
-
-  const onMouseLeave = ()=>{
+  const onMouseLeft = ()=>{
     setDropdown(false);
   }
 
+  const [navbar, setNavbar] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY >= 80){
+      setNavbar(true);
+    }
+    else{
+      setNavbar(false);
+    }
+  }
+
+  window.addEventListener('scroll', changeBackground);
+
   return (
-    <nav className='navbar'>
+    <nav className= {navbar ? 'navbar active' : 'navbar'} >
         <div className='navbar-container'> 
         <Link to="/" className='navbar-logo' onClick={closeMobileMenu} >
             TRVL <i className='fab fa-typo3'/>
@@ -36,13 +53,13 @@ function Navbar() {
           </Link>
           </li>
           <li className='nav-item'
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onClick={onMouseEnter}
+          onMouseLeave={onMouseLeft}
           > 
           <div className='nav-links' >
             Destinations &nbsp;<i className='fas fa-caret-down'/>
           </div>
-          {dropdown && <Dropdown />}
+          {dropdown && <Dropdown  closeMobileMenu={closeMobileMenu} />}
           </li>
           <li className='nav-item'> 
           <Link to='/about-us' className='nav-links' onClick={closeMobileMenu} >
