@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
+  margin-top: -80px;
 }
 
 .navbar.active{
@@ -23,7 +24,7 @@
 }
 
 .navbar-logo {
-  color: #272727;
+  color: #fff;
   justify-self: start;
   margin-left: 20px;
   cursor: pointer;
@@ -54,7 +55,7 @@
 }
 
 .nav-links {
-  color: #272727;
+  color: #fff;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -159,7 +160,7 @@
 
   .nav-links-mobile:hover {
     background: #fff;
-    color: #242424;
+    color: #fff;
     transition: 250ms;
   }
 }
